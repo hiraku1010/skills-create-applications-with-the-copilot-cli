@@ -24,6 +24,24 @@ function divide(a, b) {
   return a / b;
 }
 
+function modulo(a, b) {
+  if (b === 0) {
+    throw new Error('Modulo by zero');
+  }
+  return a % b;
+}
+
+function power(base, exponent) {
+  return Math.pow(base, exponent);
+}
+
+function squareRoot(n) {
+  if (n < 0) {
+    throw new Error('Square root of negative number');
+  }
+  return Math.sqrt(n);
+}
+
 function compute(op, a, b) {
   const o = String(op).toLowerCase();
   switch (o) {
@@ -43,6 +61,16 @@ function compute(op, a, b) {
     case 'div':
     case 'divide':
       return divide(a, b);
+    case '%':
+    case 'mod':
+      return modulo(a, b);
+    case '^':
+    case 'pow':
+    case 'power':
+      return power(a, b);
+    case 'sqrt':
+    case 'squareroot':
+      return squareRoot(a);
     default:
       throw new Error('Unsupported operation: ' + op);
   }
@@ -53,5 +81,8 @@ module.exports = {
   subtract,
   multiply,
   divide,
+  modulo,
+  power,
+  squareRoot,
   compute,
 };
