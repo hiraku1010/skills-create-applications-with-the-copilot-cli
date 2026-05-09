@@ -35,3 +35,39 @@ describe('Calculator - basic operations', () => {
     expect(calc.divide(7, 2)).toBeCloseTo(3.5, 5);
   });
 });
+
+
+describe('Calculator - extended operations (modulo, power, sqrt)', () => {
+  test('modulo: 5 % 2 = 1', () => {
+    expect(calc.modulo(5, 2)).toBe(1);
+    expect(calc.compute('%', 5, 2)).toBe(1);
+    expect(calc.compute('mod', 5, 2)).toBe(1);
+  });
+
+  test('modulo by zero throws', () => {
+    expect(() => calc.modulo(1, 0)).toThrow(/Modulo by zero/);
+    expect(() => calc.compute('%', 1, 0)).toThrow(/Modulo by zero/);
+  });
+
+  test('power: 2 ^ 8 = 256', () => {
+    expect(calc.power(2, 8)).toBe(256);
+    expect(calc.compute('^', 2, 8)).toBe(256);
+    expect(calc.compute('pow', 2, 8)).toBe(256);
+  });
+
+  test('power with negative exponent: 2 ^ -2 = 0.25', () => {
+    expect(calc.power(2, -2)).toBeCloseTo(0.25, 10);
+  });
+
+  test('squareRoot: sqrt(16) = 4', () => {
+    expect(calc.squareRoot(16)).toBe(4);
+    // compute uses only one operand for sqrt; ensure compute handles it
+    expect(calc.compute('sqrt', 16)).toBe(4);
+  });
+
+  test('squareRoot of negative number throws', () => {
+    expect(() => calc.squareRoot(-9)).toThrow(/Square root of negative number/);
+    expect(() => calc.compute('sqrt', -9)).toThrow(/Square root of negative number/);
+  });
+});
+
